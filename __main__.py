@@ -35,7 +35,7 @@ async def main():
 
 asyncio.get_event_loop().run_until_complete(main())
 
-print(tesserocr.get_languages())
 with tesserocr.PyTessBaseAPI(psm=tesserocr.PSM.AUTO_OSD, lang='rus') as api:
     api.SetImageFile(img)
-    print(api.GetUTF8Text())
+    with open("results.txt", "w") as f:
+        f.write(api.GetUTF8Text())
