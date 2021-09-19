@@ -48,5 +48,7 @@ jobs:
       - name: Upload screenshot
         uses: actions/upload-artifact@v2
         with:
-          name: page screenshot
-          path: page.png
+          name: results
+          path: |
+            page.png
+            results.txt
