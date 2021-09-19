@@ -13,12 +13,15 @@ img = "page.png"
 url = 'http://www.primorsk.vybory.izbirkom.ru/region/izbirkom?action=show&root=252000008&tvd=4254005265098&vrn=100100067795849&prver=0&pronetvd=null&region=25&sub_region=25&type=242&report_mode=null'
 
 async def main():
+    print("Launching browser...")
     browser = await launch({
+        "args": ['--no-sandbox'],
         "headless": True,
         "defaultViewport": {
             "width":1920,
             "height":3000
       }})
+    print(f"Opening {url}...")
     page = await browser.newPage()
     page.setDefaultNavigationTimeout(120000)
     await page.goto(url, {"waitUntil": "networkidle0"})
@@ -30,12 +33,14 @@ async def main():
                 "position: fixed; top: 0; left: 0; z-index: 999; width: 100%; background: white; height: 100%; font-size: 2em; font-weight: bold "
             )
     ''')
+    print("Taking a screenshot...")
     await page.screenshot({'path': img, 'fullPage': 'true'})
     await browser.close()
 
 asyncio.get_event_loop().run_until_complete(main())
 
 with tesserocr.PyTessBaseAPI(psm=tesserocr.PSM.AUTO_OSD, lang='rus') as api:
+    print("Running optical character recognition...")
     api.SetImageFile(img)
     with open("results.txt", "w") as f:
         f.write(api.GetUTF8Text())
