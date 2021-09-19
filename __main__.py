@@ -27,7 +27,7 @@ async def main():
             .parentElement
             .setAttribute(
                 "style", 
-                "position: fixed; top: 0; left: 0; z-index: 999; width: 100%; background: white;"
+                "position: fixed; top: 0; left: 0; z-index: 999; width: 100%; background: white; height: 100%"
             )
     ''')
     await page.screenshot({'path': img, 'fullPage': 'true'})
