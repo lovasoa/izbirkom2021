@@ -9,7 +9,8 @@ import asyncio
 from pyppeteer import launch
 import tesserocr
 
-img = "example.png"
+img = "page.png"
+url = 'http://www.primorsk.vybory.izbirkom.ru/region/izbirkom?action=show&root=252000008&tvd=4254005265098&vrn=100100067795849&prver=0&pronetvd=null&region=25&sub_region=25&type=242&report_mode=null'
 
 async def main():
     browser = await launch({
@@ -19,7 +20,8 @@ async def main():
             "height":10800
       }})
     page = await browser.newPage()
-    await page.goto('http://www.primorsk.vybory.izbirkom.ru/region/izbirkom?action=show&root=252000008&tvd=4254005265098&vrn=100100067795849&prver=0&pronetvd=null&region=25&sub_region=25&type=242&report_mode=null&fbclid=IwAR2gF-3jFgW-j6QOLKuRbVDHisiqGVISroTPjtP2Sm7bh0STXMT2BUR-nIU')
+    page.setDefaultNavigationTimeout(120000)
+    await page.goto(url)
     await page.screenshot({'path': img, 'fullPage': 'true'})
     await browser.close()
 
