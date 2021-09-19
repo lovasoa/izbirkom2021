@@ -21,7 +21,7 @@ async def main():
       }})
     page = await browser.newPage()
     page.setDefaultNavigationTimeout(120000)
-    await page.goto(url)
+    await page.goto(url, {"waitUntil": "networkidle0"})
     await page.evaluate('''
         document.getElementById("election-results")
             .parentElement
