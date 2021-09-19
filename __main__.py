@@ -17,7 +17,7 @@ async def main():
         "headless": True,
         "defaultViewport": {
             "width":1920,
-            "height":5800
+            "height":3000
       }})
     page = await browser.newPage()
     page.setDefaultNavigationTimeout(120000)
@@ -27,7 +27,7 @@ async def main():
             .parentElement
             .setAttribute(
                 "style", 
-                "position: fixed; top: 0; left: 0; z-index: 999; width: 100%; background: white; height: 100%"
+                "position: fixed; top: 0; left: 0; z-index: 999; width: 100%; background: white; height: 100%; font-size: 2em; font-weight: bold "
             )
     ''')
     await page.screenshot({'path': img, 'fullPage': 'true'})
