@@ -17,11 +17,19 @@ async def main():
         "headless": True,
         "defaultViewport": {
             "width":1920,
-            "height":10800
+            "height":5800
       }})
     page = await browser.newPage()
     page.setDefaultNavigationTimeout(120000)
     await page.goto(url)
+    await page.evaluate('''
+        document.getElementById("election-results")
+            .parentElement
+            .setAttribute(
+                "style", 
+                "position: fixed; top: 0; left: 0; z-index: 999; width: 100%; background: white;"
+            )
+    ''')
     await page.screenshot({'path': img, 'fullPage': 'true'})
     await browser.close()
 
