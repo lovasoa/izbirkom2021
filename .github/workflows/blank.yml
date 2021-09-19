@@ -28,10 +28,12 @@ jobs:
 
       - uses: actions/cache@v2
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-
+          path: |
+            ~/.cache
+            ~/.local
+          key: ${{ runner.os }}-local
           restore-keys: |
-            ${{ runner.os }}-pip-
+            ${{ runner.os }}-local
   
       # Runs a single command using the runners shell
       - name: install tesseract
